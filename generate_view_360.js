@@ -73,6 +73,7 @@ const imageList = [
     "civik_fk/72.webp"
   ];
 currentFocusIndex=0;
+isDrag = false;
 function CreateView360(){
     
     let templateGen='';
@@ -82,17 +83,17 @@ function CreateView360(){
         if(i == 0)
         {
             imageTemplate += `
-                <img id=${i} src="${imageList[i]}" style="display:unset; z-index:999" />
+                <img class="image-item" id=${i} src="${imageList[i]}" style=" object-fit: cover; display:unset; z-index:999; pointer-events: none; -webkit-user-select: none; -ms-user-select: none;  user-select: none;" />
             `;
         }
         else{
             imageTemplate += `
-                <img id=${i} src="${imageList[i]}" style="display:none; z-index:999" />
+                <img class="image-item" id=${i} src="${imageList[i]}" style=" object-fit: cover; display:none; z-index:999; pointer-events: none; -webkit-user-select: none; -ms-user-select: none;  user-select: none;" />
             `;
         }
     }
     templateGen = `
-        <div style="display:flex; align-items:center; justify-content:center; backgroud-color:red"> 
+        <div id="templateGenerate_box" style="display:flex; align-items:center; justify-content:center; backgroud-color:red;  cursor: grab;"  onpointerdown="drageEnter(event)" onpointerup="drageLeave(event)"  onpointermove="dragYourCar(event)"> 
         ${imageTemplate}
         </div>
     `;
@@ -132,5 +133,28 @@ function viewLeft(){
 }
 function updateCurrentFocusIndex(currentIndex){
     currentFocusIndex = currentIndex;
+}
+function drageEnter(event){
+    console.log('drag Enter !');
+    document.getElementById('templateGenerate_box').style.cursor= 'grabbing';
+    isDrag = true;
+}
+function drageLeave(event){
+    console.log('drag Leave !');
+    document.getElementById('templateGenerate_box').style.cursor= 'grab'
+    isDrag = false;
+}
+function dragYourCar(event){
+    if(!isDrag)
+    {
+        return;
+    }
+    if(event.movementX > 0)
+    {
+        viewLeft();
+    }
+    else{
+        viewRigth();
+    }
 }
 CreateView360();
