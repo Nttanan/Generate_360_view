@@ -6,6 +6,9 @@
 .container{
     height: 100%;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .container-content{
     height: 100%;
@@ -19,6 +22,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#templateGenerate_box{
+  width: 50vw;
+  height: 50vh;
+}
+#templateGenerate_box img{
+  width: 50vw;
+  height: 50vh;
 }
 
 .boton-elegante {
@@ -65,4 +76,13 @@
     .image-item{
       width: 100vw;
     }
+    #templateGenerate_box{
+      width: 100%;
+      height: 100%;
+    }
+    #templateGenerate_box img{
+      width: 100%;
+      height: 100%;
+    }
+    
   }
